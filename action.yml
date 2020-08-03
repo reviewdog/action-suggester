@@ -25,6 +25,10 @@ inputs:
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
+  ### Flags for reviewdog suggester ###
+  cleanup:
+    description: 'Clean up non-committed changes after the action'
+    default: 'true'
 runs:
   using: 'docker'
   image: 'Dockerfile'

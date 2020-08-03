@@ -22,6 +22,10 @@ reviewdog \
   -level="${INPUT_LEVEL}" \
   ${INPUT_REVIEWDOG_FLAGS} <"${TMPFILE}" || EXIT_CODE=$?
 
-git stash pop || true
+if [ "${INPUT_CLEANUP}" = "true" ]; then
+  git stash drop || true
+else
+  git stash pop || true
+fi
 
 exit ${EXIT_CODE}
