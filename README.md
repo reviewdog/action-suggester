@@ -55,6 +55,15 @@ inputs:
 name: reviewdog-suggester
 on: [pull_request] # Support only pull_request event.
 jobs:
+  go:
+    name: runner / suggester / gofmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: gofmt -w -s .
+      - uses: reviewdog/action-suggester@master
+        with:
+          tool_name: gofmt
   shell:
     name: runner / suggester / shell
     runs-on: ubuntu-latest
