@@ -2,8 +2,8 @@ name: Test
 on:
   pull_request:
 jobs:
-  test-pr-review:
-    name: runner / suggester
+  test-gofmt:
+    name: runner / suggester / gofmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,3 +11,15 @@ jobs:
       - uses: ./
         with:
           tool_name: gofmt
+
+  test-shfmt:
+    name: runner / suggester / shfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+      - run: go get mvdan.cc/sh/v3/cmd/shfmt
+      - run: shfmt -i 2 -ci -w .
+      - uses: ./
+        with:
+          tool_name: shfmt
