@@ -12,15 +12,23 @@ jobs:
         with:
           tool_name: gofmt
 
-  test-shfmt:
-    name: runner / suggester / shfmt
+  test-shell:
+    name: runner / suggester / shell
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
       - run: echo ::add-path::$(go env GOPATH)/bin # for Go projects
       - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+
       - run: shfmt -i 2 -ci -w .
-      - uses: ./
+      - name: suggester / shfmt
+        uses: ./
         with:
           tool_name: shfmt
+
+      - run: shellcheck -f diff $(shfmt -f .) | git apply
+      - name: suggester / shellcheck
+        uses: ./
+        with:
+          tool_name: shellcheck
