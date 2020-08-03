@@ -10,11 +10,14 @@
 ![shfmt demo](https://user-images.githubusercontent.com/3797062/89161351-75c31880-d5ad-11ea-8e05-b73b00a7783e.png)
 ![shellcheck demo](https://user-images.githubusercontent.com/3797062/89164248-cfc5dd00-d5b1-11ea-9983-188f56de7eba.png)
 ![gofmt demo](https://user-images.githubusercontent.com/3797062/89164333-ea985180-d5b1-11ea-9452-1240c2dc82f7.png)
+![multiline demo](https://user-images.githubusercontent.com/3797062/89168305-a3ad5a80-d5b7-11ea-8939-be7ac1976d30.png)
 
 action-suggester is a handy action which suggests any code changes based on
 diff through GitHub Multi-line code suggestions by using [reviewdog](https://github.com/reviewdog/reviewdog).
 
-You can use any formatters or linters with auto-fix feature for any languages.
+You can use any formatters or linters with auto-fix feature for any languages
+and the reviewdog suggester support any changes including inline change,
+multi-line changes, insertion, and deletion.
 
 ## Input
 
