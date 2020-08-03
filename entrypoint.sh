@@ -22,6 +22,6 @@ reviewdog \
   -level="${INPUT_LEVEL}" \
   ${INPUT_REVIEWDOG_FLAGS} < ${TMPFILE} || EXIT_CODE=$?
 
-git stash pop
+git stash pop || true
 
 exit ${EXIT_CODE}
