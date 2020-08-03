@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
-      - run: echo ::add-path::$(go env GOPATH)/bin # for Go projects
+      - run: echo ::add-path::$(go env GOPATH)/bin
       - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
 
       - run: shfmt -i 2 -ci -w .
@@ -27,7 +27,12 @@ jobs:
         with:
           tool_name: shfmt
 
-      - run: sudo apt-get install shellcheck
+      - name: install shellcheck
+        run: |
+          scversion="latest"
+          wget -qO- "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
+          sudo cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
+          rm -rf "shellcheck-${scversion}/shellcheck"
       - run: shellcheck -f diff $(shfmt -f .) | git apply
       - name: suggester / shellcheck
         uses: ./
