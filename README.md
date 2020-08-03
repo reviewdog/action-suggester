@@ -1,49 +1,43 @@
-# action-template
+# action-suggester
 
-<!-- TODO: replace reviewdog/action-template with your repo name -->
-[![Test](https://github.com/reviewdog/action-template/workflows/Test/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3ATest)
-[![reviewdog](https://github.com/reviewdog/action-template/workflows/reviewdog/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Areviewdog)
-[![depup](https://github.com/reviewdog/action-template/workflows/depup/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Adepup)
-[![release](https://github.com/reviewdog/action-template/workflows/release/badge.svg)](https://github.com/reviewdog/action-template/actions?query=workflow%3Arelease)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/reviewdog/action-template?logo=github&sort=semver)](https://github.com/reviewdog/action-template/releases)
+[![Test](https://github.com/reviewdog/action-suggester/workflows/Test/badge.svg)](https://github.com/reviewdog/action-suggester/actions?query=workflow%3ATest)
+[![reviewdog](https://github.com/reviewdog/action-suggester/workflows/reviewdog/badge.svg)](https://github.com/reviewdog/action-suggester/actions?query=workflow%3Areviewdog)
+[![depup](https://github.com/reviewdog/action-suggester/workflows/depup/badge.svg)](https://github.com/reviewdog/action-suggester/actions?query=workflow%3Adepup)
+[![release](https://github.com/reviewdog/action-suggester/workflows/release/badge.svg)](https://github.com/reviewdog/action-suggester/actions?query=workflow%3Arelease)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/reviewdog/action-suggester?logo=github&sort=semver)](https://github.com/reviewdog/action-suggester/releases)
 [![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
 
-![github-pr-review demo](https://user-images.githubusercontent.com/3797062/73162963-4b8e2b00-4132-11ea-9a3f-f9c6f624c79f.png)
-![github-pr-check demo](https://user-images.githubusercontent.com/3797062/73163032-70829e00-4132-11ea-8481-f213a37db354.png)
+![shfmt demo](https://user-images.githubusercontent.com/3797062/89161351-75c31880-d5ad-11ea-8e05-b73b00a7783e.png)
+![shellcheck demo](https://user-images.githubusercontent.com/3797062/89164248-cfc5dd00-d5b1-11ea-9983-188f56de7eba.png)
+![gofmt demo](https://user-images.githubusercontent.com/3797062/89164333-ea985180-d5b1-11ea-9452-1240c2dc82f7.png)
+![multiline demo](https://user-images.githubusercontent.com/3797062/89168305-a3ad5a80-d5b7-11ea-8939-be7ac1976d30.png)
 
-This is a template repository for [reviewdog](https://github.com/reviewdog/reviewdog) action with release automation.
-Click `Use this template` button to create your reviewdog action :dog:!
+action-suggester is a handy action which suggests any code changes based on
+diff through GitHub Multi-line code suggestions by using [reviewdog](https://github.com/reviewdog/reviewdog).
 
-If you want to create your own reviewdog action from scratch without using this
-template, please check and copy release automation flow.
-It's important to manage release workflow and sync reviewdog version for all
-reviewdog actions.
-
-This repo contains a sample action to run [misspell](https://github.com/client9/misspell).
+You can use any formatters or linters with auto-fix feature for any languages
+and the reviewdog suggester support any changes including inline change,
+multi-line changes, insertion, and deletion.
 
 ## Input
 
-<!-- TODO: update -->
 ```yaml
 inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
-  workdir:
-    description: 'Working directory relative to the root directory.'
-    default: '.'
   ### Flags for reviewdog ###
+  tool_name:
+    description: 'Tool name to use for reviewdog reporter'
+    default: 'reviewdog-suggester'
   level:
     description: 'Report level for reviewdog [info,warning,error]'
-    default: 'error'
-  reporter:
-    description: 'Reporter of reviewdog command [github-pr-check,github-check,github-pr-review].'
-    default: 'github-pr-check'
+    default: 'warning'
   filter_mode:
     description: |
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
-      Default is added.
-    default: 'added'
+      Default is diff_context. GitHub suggestions only support added and diff_context.
+    default: 'diff_context'
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
@@ -52,64 +46,52 @@ inputs:
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
-  ### Flags for <linter-name> ###
-  locale:
-    description: '-locale flag of misspell. (US/UK)'
-    default: ''
+  ### Flags for reviewdog suggester ###
+  cleanup:
+    description: 'Clean up non-committed changes after the action'
+    default: 'true'
 ```
 
-## Usage
-<!-- TODO: update. replace `template` with the linter name -->
+## Usage Example
 
 ```yaml
-name: reviewdog
-on: [pull_request]
+name: reviewdog-suggester
+on: [pull_request] # Support only pull_request event.
 jobs:
-  # TODO: change `linter_name`.
-  linter_name:
-    name: runner / <linter-name>
+  go:
+    name: runner / suggester / gofmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: reviewdog/action-template@v1
+      - run: gofmt -w -s .
+      - uses: reviewdog/action-suggester@master
         with:
-          github_token: ${{ secrets.github_token }}
-          # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
-          reporter: github-pr-review
-          # Change reporter level if you need.
-          # GitHub Status Check won't become failure with warning.
-          level: warning
+          tool_name: gofmt
+  shell:
+    name: runner / suggester / shell
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+      - run: echo ::add-path::$(go env GOPATH)/bin
+      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+
+      - run: shfmt -i 2 -ci -w .
+      - name: suggester / shfmt
+        uses: reviewdog/action-suggester@master
+        with:
+          tool_name: shfmt
+
+      # Need to install latest shellcheck to use diff output format as of writing (2020/08/03).
+      - name: install shellcheck
+        run: |
+          scversion="latest"
+          wget -qO- "https://github.com/koalaman/shellcheck/releases/download/${scversion?}/shellcheck-${scversion?}.linux.x86_64.tar.xz" | tar -xJv
+          sudo cp "shellcheck-${scversion}/shellcheck" /usr/local/bin/
+          rm -rf "shellcheck-${scversion}/shellcheck"
+      - run: shellcheck -f diff $(shfmt -f .) | git apply
+      - name: suggester / shellcheck
+        uses: reviewdog/action-suggester@master
+        with:
+          tool_name: shellcheck
 ```
-
-## Development
-
-### Release
-
-#### [haya14busa/action-bumpr](https://github.com/haya14busa/action-bumpr)
-You can bump version on merging Pull Requests with specific labels (bump:major,bump:minor,bump:patch).
-Pushing tag manually by yourself also work.
-
-#### [haya14busa/action-update-semver](https://github.com/haya14busa/action-update-semver)
-
-This action updates major/minor release tags on a tag push. e.g. Update v1 and v1.2 tag when released v1.2.3.
-ref: https://help.github.com/en/articles/about-actions#versioning-your-action
-
-### Lint - reviewdog integration
-
-This reviewdog action template itself is integrated with reviewdog to run lints
-which is useful for Docker container based actions.
-
-![reviewdog integration](https://user-images.githubusercontent.com/3797062/72735107-7fbb9600-3bde-11ea-8087-12af76e7ee6f.png)
-
-Supported linters:
-
-- [reviewdog/action-shellcheck](https://github.com/reviewdog/action-shellcheck)
-- [reviewdog/action-hadolint](https://github.com/reviewdog/action-hadolint)
-- [reviewdog/action-misspell](https://github.com/reviewdog/action-misspell)
-
-### Dependencies Update Automation
-This repository uses [haya14busa/action-depup](https://github.com/haya14busa/action-depup) to update
-reviewdog version.
-
-[![reviewdog depup demo](https://user-images.githubusercontent.com/3797062/73154254-170e7500-411a-11ea-8211-912e9de7c936.png)](https://github.com/reviewdog/action-template/pull/6)
-
