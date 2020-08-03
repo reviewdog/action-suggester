@@ -27,6 +27,7 @@ jobs:
         with:
           tool_name: shfmt
 
+      - run: sudo apt-get install shellcheck
       - run: shellcheck -f diff $(shfmt -f .) | git apply
       - name: suggester / shellcheck
         uses: ./
