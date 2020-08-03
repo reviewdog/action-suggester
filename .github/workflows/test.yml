@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
-      - run: go get mvdan.cc/sh/v3/cmd/shfmt
+      - run: go get -u mvdan.cc/sh/v3/cmd/shfmt
       - run: shfmt -i 2 -ci -w .
       - uses: ./
         with:
