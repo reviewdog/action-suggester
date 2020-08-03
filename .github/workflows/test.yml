@@ -20,10 +20,6 @@ jobs:
       - uses: actions/setup-go@v2
       - run: echo ::add-path::$(go env GOPATH)/bin # for Go projects
       - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
-      - run: echo $PATH
-      - run: ls $GOBIN
-      - run: ls $GOPATH/bin
-      - run: ls $(go env GOPATH)/bin
       - run: shfmt -i 2 -ci -w .
       - uses: ./
         with:
