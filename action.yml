@@ -1,25 +1,22 @@
-name: 'TODO: Run <linter-name> with reviewdog'
-description: 'TODO: 🐶 Run <linter-name> with reviewdog on pull requests to improve code review experience.'
-author: 'TODO: <your-name>'
+name: 'reviewdog-suggester: Suggest any code changes based on diff with reviewdog'
+description: '🐶 Suggest any code changes based on diff through GitHub Multi-line code suggestions'
+author: 'haya14busa'
 inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
-  workdir:
-    description: 'Working directory relative to the root directory.'
-    default: '.'
   ### Flags for reviewdog ###
+  tool_name:
+    description: 'Tool name to use for reviewdog reporter'
+    default: 'reviewdog-suggester'
   level:
     description: 'Report level for reviewdog [info,warning,error]'
-    default: 'error'
-  reporter:
-    description: 'Reporter of reviewdog command [github-pr-check,github-pr-review].'
-    default: 'github-pr-check'
+    default: 'warning'
   filter_mode:
     description: |
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
-      Default is added.
-    default: 'added'
+      Default is diff_context. GitHub suggestions only support added and diff_context.
+    default: 'diff_context'
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
@@ -28,16 +25,11 @@ inputs:
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
-  ### Flags for <linter-name> ###
-  locale:
-    description: '-locale flag of misspell. (US/UK)'
-    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
-# TODO: update branding if you want.
 branding:
-  icon: 'check'
-  color: 'blue'
+  icon: 'edit'
+  color: 'red'
