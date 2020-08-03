@@ -27,6 +27,7 @@ jobs:
         with:
           tool_name: shfmt
 
+      # Need to install latest shellcheck to use diff output format as of writing (2020/08/03).
       - name: install shellcheck
         run: |
           scversion="latest"
