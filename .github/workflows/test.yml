@@ -18,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
-      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt && go install mvdan.cc/sh/v3/cmd/shfmt
+      - run: echo ::add-path::$(go env GOPATH)/bin # for Go projects
+      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
       - run: echo $PATH
       - run: ls $GOBIN
       - run: ls $GOPATH/bin
