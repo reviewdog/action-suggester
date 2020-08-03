@@ -19,6 +19,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
       - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+      - run: echo $PATH
+      - run: ls $GOBIN
+      - run: ls $GOPATH/bin
       - run: shfmt -i 2 -ci -w .
       - uses: ./
         with:
