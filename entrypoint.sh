@@ -8,7 +8,7 @@ fi
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 TMPFILE=$(mktemp)
-git diff > ${TMPFILE}
+git diff > "${TMPFILE}"
 
 git stash -u
 
@@ -20,7 +20,7 @@ reviewdog \
   -filter-mode="${INPUT_FILTER_MODE}" \
   -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
   -level="${INPUT_LEVEL}" \
-  ${INPUT_REVIEWDOG_FLAGS} < ${TMPFILE} || EXIT_CODE=$?
+  ${INPUT_REVIEWDOG_FLAGS} < "${TMPFILE}" || EXIT_CODE=$?
 
 git stash pop || true
 
