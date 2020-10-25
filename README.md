@@ -64,7 +64,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: gofmt -w -s .
-      - uses: reviewdog/action-suggester@master
+      - uses: reviewdog/action-suggester@v1
         with:
           tool_name: gofmt
   shell:
@@ -78,7 +78,7 @@ jobs:
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
-        uses: reviewdog/action-suggester@master
+        uses: reviewdog/action-suggester@v1
         with:
           tool_name: shfmt
 
@@ -91,7 +91,7 @@ jobs:
           rm -rf "shellcheck-${scversion}/shellcheck"
       - run: shellcheck -f diff $(shfmt -f .) | patch -p1
       - name: suggester / shellcheck
-        uses: reviewdog/action-suggester@master
+        uses: reviewdog/action-suggester@v1
         with:
           tool_name: shellcheck
 ```
