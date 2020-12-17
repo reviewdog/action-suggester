@@ -1,5 +1,9 @@
 package testdata
 
+func    demo     () {
+	println(      "hello, from the demo night 🌆"    )
+} 
+
 func    fmt     () {
 	// test
 	// test line
