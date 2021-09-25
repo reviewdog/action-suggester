@@ -5,33 +5,55 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
+    required: true
   ### Flags for reviewdog ###
   tool_name:
     description: 'Tool name to use for reviewdog reporter'
     default: 'reviewdog-suggester'
+    required: false
   level:
     description: 'Report level for reviewdog [info,warning,error]'
     default: 'warning'
+    required: false
   filter_mode:
     description: |
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
       Default is diff_context. GitHub suggestions only support added and diff_context.
     default: 'diff_context'
+    required: false
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
       Default is `false`.
     default: 'false'
+    required: false
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
+    required: false
   ### Flags for reviewdog suggester ###
   cleanup:
     description: 'Clean up non-committed changes after the action'
     default: 'true'
+    required: false
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+    - uses: reviewdog/action-setup@v1
+      with:
+        reviewdog_version: v0.13.0
+    - run: $GITHUB_ACTION_PATH/script.sh
+      shell: bash
+      env:
+        # INPUT_<VARIABLE_NAME> is not available in Composite run steps
+        # https://github.community/t/input-variable-name-is-not-available-in-composite-run-steps/127611
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_TOOL_NAME: ${{ inputs.tool_name }}
+        INPUT_LEVEL: ${{ inputs.level }}
+        INPUT_FILTER_MODE: ${{ inputs.filter_mode }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
+        INPUT_REVIEWDOG_FLAGS: ${{ inputs.reviewdog_flags }}
+        INPUT_WORKDIR: ${{ inputs.workdir }}
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 branding:
