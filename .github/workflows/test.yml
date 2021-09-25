@@ -11,6 +11,7 @@ jobs:
       - uses: ./
         with:
           tool_name: gofmt
+          filter_mode: nofilter
 
   test-shell:
     name: runner / suggester / shell
