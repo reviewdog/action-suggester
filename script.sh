@@ -12,6 +12,7 @@ git diff >"${TMPFILE}"
 
 git stash -u
 
+# shellcheck disable=SC2086
 reviewdog \
   -name="${INPUT_TOOL_NAME:-reviewdog-suggester}" \
   -f=diff \
@@ -20,7 +21,7 @@ reviewdog \
   -filter-mode="${INPUT_FILTER_MODE}" \
   -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
   -level="${INPUT_LEVEL}" \
-  ${INPUT_REVIEWDOG_FLAGS} <"${TMPFILE}"
+  ${INPUT_REVIEWDOG_FLAGS} <"${TMPFILE}" # INPUT_REVIEWDOG_FLAGS is intentionally split to pass multiple flags
 
 EXIT_CODE=$?
 
