@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: "1.20"
-      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+      - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
