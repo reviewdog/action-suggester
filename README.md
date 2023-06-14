@@ -72,9 +72,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v2
-      - run: echo ::add-path::$(go env GOPATH)/bin
-      - run: GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+      - uses: actions/setup-go@v4
+      - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
