@@ -1,48 +1,58 @@
-name: 'reviewdog-suggester: Suggest any code changes based on diff with reviewdog'
-description: '🐶 Suggest any code changes based on diff through GitHub Multi-line code suggestions'
-author: 'haya14busa'
+name: "reviewdog-suggester: Suggest any code changes based on diff with reviewdog"
+description: "🐶 Suggest any code changes based on diff through GitHub Multi-line code suggestions"
+author: "haya14busa"
 inputs:
   github_token:
-    description: 'GITHUB_TOKEN'
-    default: '${{ github.token }}'
+    description: "GITHUB_TOKEN"
+    default: "${{ github.token }}"
     required: true
   ### Flags for reviewdog ###
   tool_name:
-    description: 'Tool name to use for reviewdog reporter'
-    default: 'reviewdog-suggester'
+    description: "Tool name to use for reviewdog reporter"
+    default: "reviewdog-suggester"
     required: false
   level:
-    description: 'Report level for reviewdog [info,warning,error]'
-    default: 'warning'
+    description: "Report level for reviewdog [info,warning,error]"
+    default: "warning"
     required: false
   filter_mode:
     description: |
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
       Default is diff_context. GitHub suggestions only support added and diff_context.
-    default: 'diff_context'
+    default: "diff_context"
     required: false
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
       Default is `false`.
-    default: 'false'
+    default: "false"
     required: false
   reviewdog_flags:
-    description: 'Additional reviewdog flags'
-    default: ''
+    description: "Additional reviewdog flags"
+    default: ""
     required: false
   ### Flags for reviewdog suggester ###
   cleanup:
-    description: 'Clean up non-committed changes after the action'
-    default: 'true'
+    description: "Clean up non-committed changes after the action"
+    default: "true"
     required: false
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - uses: reviewdog/action-setup@v1
-      with:
-        reviewdog_version: v0.14.2
-    - run: $GITHUB_ACTION_PATH/script.sh
+    - run: |
+        set -euo pipefail
+        "$GITHUB_ACTION_PATH/install.sh"
+      shell: bash
+      env:
+        REVIEWDOG_VERSION: v0.14.2
+        REVIEWDOG_TEMPDIR: ${{ runner.temp }}
+    - run: |
+        set -euo pipefail
+        "$GITHUB_ACTION_PATH/check-install.sh"
+      shell: bash
+    - run: |
+        set -euo pipefail
+        "$GITHUB_ACTION_PATH/script.sh"
       shell: bash
       env:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
@@ -57,5 +67,5 @@ runs:
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 branding:
-  icon: 'edit'
-  color: 'red'
+  icon: "edit"
+  color: "red"

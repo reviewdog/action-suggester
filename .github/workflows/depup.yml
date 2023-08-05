@@ -1,7 +1,7 @@
 name: depup
 on:
   schedule:
-    - cron:  '14 14 * * *' # Runs at 14:14 UTC every day
+    - cron: "14 14 * * *" # Runs at 14:14 UTC every day
   repository_dispatch:
     types: [depup]
   workflow_dispatch:
@@ -14,6 +14,14 @@ jobs:
       - uses: reviewdog/action-depup/with-pr@v1
         with:
           file: action.yml
-          version_name: reviewdog_version
+          version_name: REVIEWDOG_VERSION
           repo: reviewdog/reviewdog
           labels: "bump:minor"
+
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./.github/depup.sh
+      - name: commit and create a pull request
+        uses: shogo82148/actions-commit-and-create-pr@v1
