@@ -48,7 +48,7 @@ runs:
         REVIEWDOG_TEMPDIR: ${{ runner.temp }}
     - run: |
         set -euo pipefail
-        "$GITHUB_ACTION_PATH/check-install.sh"
+        "$GITHUB_ACTION_PATH/check-installed.sh"
       shell: bash
     - run: |
         set -euo pipefail
