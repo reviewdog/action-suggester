@@ -7,7 +7,7 @@ set -eu
 # cleanup temporary directory
 unset tmpdir
 atexit() {
-  [[ -n ${tmpdir-} ]] && rm -f "$tmpdir"
+  [[ -n ${tmpdir-} ]] && rm -rf "$tmpdir"
 }
 trap atexit EXIT
 trap 'rc=$?; trap - EXIT; atexit; exit $?' INT PIPE TERM
