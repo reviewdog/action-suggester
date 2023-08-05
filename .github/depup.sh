@@ -12,8 +12,8 @@ atexit() {
 trap atexit EXIT
 trap 'rc=$?; trap - EXIT; atexit; exit $?' INT PIPE TERM
 
-tempdir=$(mktemp -d)
+tmpdir=$(mktemp -d)
 
 # sync install.sh with https://github.com/reviewdog/action-setup
-curl -sSL https://raw.githubusercontent.com/reviewdog/action-setup/master/install.sh -o "$tempdir/install.sh"
-install -m 755 "$tempdir/install.sh" "$CURRENT/../install.sh"
+curl -sSL https://raw.githubusercontent.com/reviewdog/action-setup/master/install.sh -o "$tmpdir/install.sh"
+install -m 755 "$tmpdir/install.sh" "$CURRENT/../install.sh"
