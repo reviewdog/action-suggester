@@ -41,18 +41,18 @@ runs:
   steps:
     - run: |
         set -euo pipefail
-        "$GITHUB_ACTION_PATH/install.sh"
+        . "$GITHUB_ACTION_PATH/install.sh"
       shell: bash
       env:
         REVIEWDOG_VERSION: v0.14.2
         REVIEWDOG_TEMPDIR: ${{ runner.temp }}
     - run: |
         set -euo pipefail
-        "$GITHUB_ACTION_PATH/check-installed.sh"
+        . "$GITHUB_ACTION_PATH/check-installed.sh"
       shell: bash
     - run: |
         set -euo pipefail
-        "$GITHUB_ACTION_PATH/script.sh"
+        . "$GITHUB_ACTION_PATH/script.sh"
       shell: bash
       env:
         # INPUT_<VARIABLE_NAME> is not available in Composite run steps
