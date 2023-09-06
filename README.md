@@ -62,7 +62,7 @@ jobs:
     name: runner / suggester / gofmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: gofmt -w -s .
       - uses: reviewdog/action-suggester@v1
         with:
@@ -71,7 +71,7 @@ jobs:
     name: runner / suggester / shell
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-go@v4
       - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
