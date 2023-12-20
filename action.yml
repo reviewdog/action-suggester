@@ -44,7 +44,7 @@ runs:
         . "$GITHUB_ACTION_PATH/install.sh"
       shell: bash
       env:
-        REVIEWDOG_VERSION: v0.15.0
+        REVIEWDOG_VERSION: v0.16.0
         REVIEWDOG_TEMPDIR: ${{ runner.temp }}
     - run: |
         set -euo pipefail
