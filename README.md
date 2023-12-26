@@ -52,6 +52,20 @@ inputs:
     default: 'true'
 ```
 
+## Required Permissions
+
+The action requires the following permissions:
+
+```yaml
+permissions:
+  contents: read
+  checks: write
+  issues: write
+  pull-requests: write
+```
+
+See [Assigning permissions to jobs](https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs) for more details.
+
 ## Usage Example
 
 ```yaml
