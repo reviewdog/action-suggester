@@ -6,6 +6,7 @@
 [![release](https://github.com/reviewdog/action-suggester/workflows/release/badge.svg)](https://github.com/reviewdog/action-suggester/actions?query=workflow%3Arelease)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/reviewdog/action-suggester?logo=github&sort=semver)](https://github.com/reviewdog/action-suggester/releases)
 [![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
+[![Used-by counter](https://img.shields.io/endpoint?url=https://haya14busa.github.io/github-used-by/data/reviewdog/action-suggester/shieldsio.json)](https://github.com/haya14busa/github-used-by/tree/main/repo/reviewdog/action-suggester)
 
 ![shfmt demo](https://user-images.githubusercontent.com/3797062/89161351-75c31880-d5ad-11ea-8e05-b73b00a7783e.png)
 ![shellcheck demo](https://user-images.githubusercontent.com/3797062/89164248-cfc5dd00-d5b1-11ea-9983-188f56de7eba.png)
