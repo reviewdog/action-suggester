@@ -6,6 +6,10 @@ inputs:
     description: "GITHUB_TOKEN"
     default: "${{ github.token }}"
     required: true
+  reviewdog_version:
+    description: "Version of reviewdog to use"
+    default: "v0.20.1"
+    required: true
   ### Flags for reviewdog ###
   tool_name:
     description: "Tool name to use for reviewdog reporter"
@@ -44,7 +48,7 @@ runs:
         . "$GITHUB_ACTION_PATH/install.sh"
       shell: bash
       env:
-        REVIEWDOG_VERSION: v0.20.1
+        REVIEWDOG_VERSION: ${{ inputs.reviewdog_version }}
         REVIEWDOG_TEMPDIR: ${{ runner.temp }}
     - run: |
         set -euo pipefail
