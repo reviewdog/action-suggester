@@ -5,6 +5,11 @@ if [ -n "${GITHUB_WORKSPACE}" ]; then
   cd "${GITHUB_WORKSPACE}" || exit
 fi
 
+if [ "${INPUT_FAIL_ON_ERROR}" = "true" ]; then
+  echo "::warning title=fail-on-error-is-deprecated::reviewdog: -fail-on-error is deprecated"
+  INPUT_REVIEWDOG_FLAGS="${INPUT_REVIEWDOG_FLAGS} -fail-level=error "
+fi
+
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 TMPFILE=$(mktemp)
@@ -31,4 +36,4 @@ else
   git stash pop || true
 fi
 
-exit "${EXIT_CODE}"
+exit "${EXIT_CODE}
