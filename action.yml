@@ -23,6 +23,7 @@ inputs:
     required: false
   fail_on_error:
     description: |
+      This flag is Deprecated!
       Exit code for reviewdog when errors are found [true,false]
       Default is `false`.
     default: "false"
