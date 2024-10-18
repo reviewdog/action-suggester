@@ -39,11 +39,6 @@ inputs:
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
       Default is diff_context. GitHub suggestions only support added and diff_context.
     default: 'diff_context'
-  fail_on_error:
-    description: |
-      Exit code for reviewdog when errors are found [true,false]
-      Default is `false`.
-    default: 'false'
   reviewdog_flags:
     description: 'Additional reviewdog flags'
     default: ''
