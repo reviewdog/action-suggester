@@ -36,4 +36,4 @@ else
   git stash pop || true
 fi
 
-exit "${EXIT_CODE}
+exit "${EXIT_CODE}"
