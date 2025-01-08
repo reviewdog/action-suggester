@@ -19,6 +19,7 @@ reviewdog \
   -f.diff.strip=1 \
   -reporter="github-pr-review" \
   -filter-mode="${INPUT_FILTER_MODE}" \
+  -fail-level="${INPUT_FAIL_LEVEL}" \
   -fail-on-error="${INPUT_FAIL_ON_ERROR}" \
   -level="${INPUT_LEVEL}" \
   ${INPUT_REVIEWDOG_FLAGS} <"${TMPFILE}" # INPUT_REVIEWDOG_FLAGS is intentionally split to pass multiple flags

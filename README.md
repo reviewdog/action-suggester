@@ -39,6 +39,12 @@ inputs:
       Filtering mode for the reviewdog command [added,diff_context,file,nofilter].
       Default is diff_context. GitHub suggestions only support added and diff_context.
     default: 'diff_context'
+  fail_level:
+    description: |
+      Exit code 1 for reviewdog if it finds at least 1 issue with severity greater than or equal to given level [none,any,info,warning,error].
+      If set to `none`, always exit with 0.
+      Default is `none`.
+    default: 'none'
   fail_on_error:
     description: |
       Exit code for reviewdog when errors are found [true,false]
