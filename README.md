@@ -84,22 +84,22 @@ jobs:
     name: runner / suggester / gofmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - run: gofmt -w -s .
-      - uses: reviewdog/action-suggester@v1
+      - uses: reviewdog/action-suggester@4747dbc9f9e37adba0943e681cc20db466642158 # v1.21.0
         with:
           tool_name: gofmt
   shell:
     name: runner / suggester / shell
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-go@93397bea11091df50f3d7e59dc26a7711a8bcfbe # v4.1.0
       - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
-        uses: reviewdog/action-suggester@v1
+        uses: reviewdog/action-suggester@4747dbc9f9e37adba0943e681cc20db466642158 # v1.21.0
         with:
           tool_name: shfmt
 
@@ -112,7 +112,7 @@ jobs:
           rm -rf "shellcheck-${scversion}/shellcheck"
       - run: shellcheck -f diff $(shfmt -f .) | patch -p1
       - name: suggester / shellcheck
-        uses: reviewdog/action-suggester@v1
+        uses: reviewdog/action-suggester@4747dbc9f9e37adba0943e681cc20db466642158 # v1.21.0
         with:
           tool_name: shellcheck
 ```
