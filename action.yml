@@ -6,6 +6,10 @@ inputs:
     description: "GITHUB_TOKEN"
     default: "${{ github.token }}"
     required: true
+  path:
+    description: "The directory in which reviewdog should run"
+    default: "."
+    required: false
   ### Flags for reviewdog ###
   tool_name:
     description: "Tool name to use for reviewdog reporter"
@@ -73,6 +77,7 @@ runs:
         INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
         INPUT_REVIEWDOG_FLAGS: ${{ inputs.reviewdog_flags }}
         INPUT_CLEANUP: ${{ inputs.cleanup }}
+      working-directory: ${{ inputs.path }}
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 branding:
