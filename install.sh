@@ -13,9 +13,9 @@ if [ -z "${TEMP}" ]; then
   fi
 fi
 
-INSTALL_SCRIPT='https://raw.githubusercontent.com/reviewdog/reviewdog/fd59714416d6d9a1c0692d872e38e7f8448df4fc/install.sh'
+INSTALL_SCRIPT='https://raw.githubusercontent.com/reviewdog/reviewdog/df70ed74df59de7ebfd9276afabd62ea2de4d7dd/install.sh'
 if [ "${VERSION}" = 'nightly' ]; then
-  INSTALL_SCRIPT='https://raw.githubusercontent.com/reviewdog/nightly/30fccfe9f47f7e6fd8b3c38aa0da11a6c9f04de7/install.sh'
+  INSTALL_SCRIPT='https://raw.githubusercontent.com/reviewdog/nightly/a41f181a20068bf2c0499054e4c19bdebc71b362/install.sh'
   VERSION='latest'
 fi
 
