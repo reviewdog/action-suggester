@@ -17,11 +17,3 @@ jobs:
           version_name: REVIEWDOG_VERSION
           repo: reviewdog/reviewdog
           labels: "bump:minor"
-
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - run: ./.github/depup.sh
-      - name: commit and create a pull request
-        uses: shogo82148/actions-commit-and-create-pr@b1322fe9da4037e9720e34ea221997cffcd3498d # v1.1.4
