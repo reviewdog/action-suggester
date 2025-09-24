@@ -14,6 +14,6 @@ jobs:
       - uses: reviewdog/action-depup/with-pr@94a1aaf4e4923064019214b48a43276218af7ad5 # v1.6.4
         with:
           file: action.yml
-          version_name: REVIEWDOG_VERSION
+          version_name: reviewdog_version
           repo: reviewdog/reviewdog
           labels: "bump:minor"
