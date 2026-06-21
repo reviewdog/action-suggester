@@ -10,16 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-      - uses: haya14busa/action-cond@94f77f7a80cd666cb3155084e428254fea4281fd # v1.2.1
-        id: reporter
-        with:
-          cond: ${{ github.event_name == 'pull_request' }}
-          if_true: "github-pr-review"
-          if_false: "github-check"
       - uses: reviewdog/action-shellcheck@4c07458293ac342d477251099501a718ae5ef86e # v1.32.0
         with:
           github_token: ${{ secrets.github_token }}
-          reporter: ${{ steps.reporter.outputs.value }}
+          reporter: ${{ case(github.event_name == 'pull_request', 'github-pr-review', 'github-check') }}
           level: warning
 
   shfmt:
