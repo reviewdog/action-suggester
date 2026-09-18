@@ -53,7 +53,7 @@ runs:
   steps:
     - uses: reviewdog/action-setup@d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f # v1.5.0
       with:
-        reviewdog_version: v0.21.1
+        reviewdog_version: v0.21.2
     - run: |
         set -euo pipefail
         . "$GITHUB_ACTION_PATH/script.sh"
