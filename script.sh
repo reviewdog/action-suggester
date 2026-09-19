@@ -5,6 +5,10 @@ if [ -n "${GITHUB_WORKSPACE}" ]; then
   cd "${GITHUB_WORKSPACE}" || exit
 fi
 
+if [ -n "${INPUT_PATH}" ]; then
+  cd "${INPUT_PATH}" || exit
+fi
+
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
 TMPFILE=$(mktemp)
