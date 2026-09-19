@@ -27,6 +27,10 @@ inputs:
   github_token:
     description: 'GITHUB_TOKEN'
     default: '${{ github.token }}'
+  path:
+    description: "The directory in which reviewdog should run"
+    default: "."
+    required: false
   ### Flags for reviewdog ###
   tool_name:
     description: 'Tool name to use for reviewdog reporter'

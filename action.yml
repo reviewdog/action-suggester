@@ -69,7 +69,7 @@ runs:
         INPUT_FAIL_ON_ERROR: ${{ inputs.fail_on_error }}
         INPUT_REVIEWDOG_FLAGS: ${{ inputs.reviewdog_flags }}
         INPUT_CLEANUP: ${{ inputs.cleanup }}
-      working-directory: ${{ inputs.path }}
+        INPUT_PATH: ${{ inputs.path }}
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 branding:
