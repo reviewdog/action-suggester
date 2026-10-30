@@ -13,7 +13,7 @@ workflows:
         - 'haya14busa/action-update-semver@v1.5.1'
     '.github/workflows/reviewdog.yml':
         - 'actions/checkout@v7.0.1'
-        - 'reviewdog/action-actionlint@v1.81.0'
+        - 'reviewdog/action-actionlint@v1.81.1'
         - 'reviewdog/action-alex@v1.19.0'
         - 'reviewdog/action-misspell@v1.30.4'
         - 'reviewdog/action-shellcheck@v1.34.1'
@@ -53,9 +53,9 @@ dependencies:
         commit: 'sha1-5f6978faf089d4d20b00c7766989d076bb2fc7f1'
         owner_id: 18365890
         repo_id: 197176365
-    'reviewdog/action-actionlint@v1.81.0':
-        ref: 'v1.81.0'
-        commit: 'sha1-5d802a8ebdcb24d712925118c3a4596f571d8fcd'
+    'reviewdog/action-actionlint@v1.81.1':
+        ref: 'v1.81.1'
+        commit: 'sha1-619a81ec64ff8c0211cd6146eb2b21e8f1d7f440'
         owner_id: 48765237
         repo_id: 385059686
     'reviewdog/action-alex@v1.19.0':
