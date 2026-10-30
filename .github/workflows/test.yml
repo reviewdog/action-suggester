@@ -6,9 +6,9 @@ jobs:
     name: runner / suggester / gofmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
       - run: gofmt -w -s .
-      - uses: ./
+      - uses: $/
         with:
           tool_name: gofmt
           filter_mode: nofilter
@@ -17,15 +17,15 @@ jobs:
     name: runner / suggester / shell
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-go@v7.0.0
         with:
           go-version: "1.27"
       - run: go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
-        uses: ./
+        uses: $/
         with:
           tool_name: shfmt
 
@@ -38,6 +38,6 @@ jobs:
           rm -rf "shellcheck-${scversion}/shellcheck"
       - run: shellcheck -f diff "$(shfmt -f .)" | patch -p1
       - name: suggester / shellcheck
-        uses: ./
+        uses: $/
         with:
           tool_name: shellcheck
