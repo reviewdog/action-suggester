@@ -9,8 +9,8 @@ jobs:
     name: runner / shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: reviewdog/action-shellcheck@d0b8d5fd7fad6afdb6e1b6ce1778892be4d1f427 # v1.34.1
+      - uses: actions/checkout@v7.0.1
+      - uses: reviewdog/action-shellcheck@v1.34.1
         with:
           github_token: ${{ secrets.github_token }}
           reporter: ${{ case(github.event_name == 'pull_request', 'github-pr-review', 'github-check') }}
@@ -20,15 +20,15 @@ jobs:
     name: runner / shfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: reviewdog/action-shfmt@c5e3ba7497c338866921924691aef4fa18bc1fe0 # v1.1.0
+      - uses: actions/checkout@v7.0.1
+      - uses: reviewdog/action-shfmt@v1.1.0
 
   actionlint:
     name: runner / actionlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: reviewdog/action-actionlint@5d802a8ebdcb24d712925118c3a4596f571d8fcd # v1.81.0
+      - uses: actions/checkout@v7.0.1
+      - uses: reviewdog/action-actionlint@v1.81.0
         with:
           reporter: github-check
           level: warning
@@ -37,8 +37,8 @@ jobs:
     name: runner / misspell
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: reviewdog/action-misspell@840bfbe9f804da9afb0bd739dc4689012f3fdd2d # v1.30.4
+      - uses: actions/checkout@v7.0.1
+      - uses: reviewdog/action-misspell@v1.30.4
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-check
@@ -49,8 +49,8 @@ jobs:
     name: runner / alex
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: reviewdog/action-alex@a86fdb2da29e06d659cd3bd528095479a2c5c01e # v1.19.0
+      - uses: actions/checkout@v7.0.1
+      - uses: reviewdog/action-alex@v1.19.0
         with:
           github_token: ${{ secrets.github_token }}
           reporter: github-check
