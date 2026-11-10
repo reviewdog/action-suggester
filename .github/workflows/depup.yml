@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: reviewdog/action-depup/with-pr@v1.6.5
+      - uses: reviewdog/action-depup/with-pr@v1.6.7
         with:
           file: action.yml
           version_name: reviewdog_version
