@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - run: gofmt -w -s .
-      - uses: ./
+      - uses: $/
         with:
           tool_name: gofmt
           filter_mode: nofilter
@@ -25,7 +25,7 @@ jobs:
 
       - run: shfmt -i 2 -ci -w .
       - name: suggester / shfmt
-        uses: ./
+        uses: $/
         with:
           tool_name: shfmt
 
@@ -38,6 +38,6 @@ jobs:
           rm -rf "shellcheck-${scversion}/shellcheck"
       - run: shellcheck -f diff "$(shfmt -f .)" | patch -p1
       - name: suggester / shellcheck
-        uses: ./
+        uses: $/
         with:
           tool_name: shellcheck
