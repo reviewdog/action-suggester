@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: reviewdog/action-shfmt@v1.1.0
+      - uses: reviewdog/action-shfmt@v1.1.1
 
   actionlint:
     name: runner / actionlint
